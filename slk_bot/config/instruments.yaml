@@ -1,0 +1,231 @@
+# SLK Bias Bot – Instrument list
+# Each entry:
+#   name:          internal name used everywhere in the bot
+#   asset_class:   forex | index | commodity | crypto
+#   oanda_symbol:  symbol as OANDA uses it (null if not on OANDA)
+#   binance_symbol: symbol as Binance uses it (null if not crypto)
+#   bybit_symbol:  symbol as Bybit uses it (null if not crypto)
+#   coinbase_symbol: symbol as Coinbase uses it (null if not crypto)
+#   alignment:     session alignment profile (see settings.yaml)
+
+instruments:
+  # ── Majors ──────────────────────────────────────────────────────────────
+  - name: EURUSD
+    asset_class: forex
+    oanda_symbol: EUR_USD
+    alignment: forex
+
+  - name: GBPUSD
+    asset_class: forex
+    oanda_symbol: GBP_USD
+    alignment: forex
+
+  - name: USDJPY
+    asset_class: forex
+    oanda_symbol: USD_JPY
+    alignment: forex
+
+  - name: USDCHF
+    asset_class: forex
+    oanda_symbol: USD_CHF
+    alignment: forex
+
+  - name: USDCAD
+    asset_class: forex
+    oanda_symbol: USD_CAD
+    alignment: forex
+
+  - name: AUDUSD
+    asset_class: forex
+    oanda_symbol: AUD_USD
+    alignment: forex
+
+  - name: NZDUSD
+    asset_class: forex
+    oanda_symbol: NZD_USD
+    alignment: forex
+
+  # ── Minors / Crosses ─────────────────────────────────────────────────────
+  - name: EURGBP
+    asset_class: forex
+    oanda_symbol: EUR_GBP
+    alignment: forex
+
+  - name: EURJPY
+    asset_class: forex
+    oanda_symbol: EUR_JPY
+    alignment: forex
+
+  - name: EURCHF
+    asset_class: forex
+    oanda_symbol: EUR_CHF
+    alignment: forex
+
+  - name: EURCAD
+    asset_class: forex
+    oanda_symbol: EUR_CAD
+    alignment: forex
+
+  - name: EURAUD
+    asset_class: forex
+    oanda_symbol: EUR_AUD
+    alignment: forex
+
+  - name: EURNZD
+    asset_class: forex
+    oanda_symbol: EUR_NZD
+    alignment: forex
+
+  - name: GBPJPY
+    asset_class: forex
+    oanda_symbol: GBP_JPY
+    alignment: forex
+
+  - name: GBPCHF
+    asset_class: forex
+    oanda_symbol: GBP_CHF
+    alignment: forex
+
+  - name: GBPCAD
+    asset_class: forex
+    oanda_symbol: GBP_CAD
+    alignment: forex
+
+  - name: GBPAUD
+    asset_class: forex
+    oanda_symbol: GBP_AUD
+    alignment: forex
+
+  - name: GBPNZD
+    asset_class: forex
+    oanda_symbol: GBP_NZD
+    alignment: forex
+
+  - name: AUDJPY
+    asset_class: forex
+    oanda_symbol: AUD_JPY
+    alignment: forex
+
+  - name: AUDCAD
+    asset_class: forex
+    oanda_symbol: AUD_CAD
+    alignment: forex
+
+  - name: AUDCHF
+    asset_class: forex
+    oanda_symbol: AUD_CHF
+    alignment: forex
+
+  - name: AUDNZD
+    asset_class: forex
+    oanda_symbol: AUD_NZD
+    alignment: forex
+
+  - name: NZDJPY
+    asset_class: forex
+    oanda_symbol: NZD_JPY
+    alignment: forex
+
+  - name: NZDCAD
+    asset_class: forex
+    oanda_symbol: NZD_CAD
+    alignment: forex
+
+  - name: NZDCHF
+    asset_class: forex
+    oanda_symbol: NZD_CHF
+    alignment: forex
+
+  - name: CADJPY
+    asset_class: forex
+    oanda_symbol: CAD_JPY
+    alignment: forex
+
+  - name: CADCHF
+    asset_class: forex
+    oanda_symbol: CAD_CHF
+    alignment: forex
+
+  - name: CHFJPY
+    asset_class: forex
+    oanda_symbol: CHF_JPY
+    alignment: forex
+
+  # ── Indices ──────────────────────────────────────────────────────────────
+  - name: NAS100
+    asset_class: index
+    oanda_symbol: NAS100_USD
+    alignment: us_index
+
+  - name: SPX500
+    asset_class: index
+    oanda_symbol: SPX500_USD
+    alignment: us_index
+
+  - name: GER40
+    asset_class: index
+    oanda_symbol: DE30_EUR          # OANDA may use DE30; checked at runtime
+    alignment: eu_index
+
+  - name: US30
+    asset_class: index
+    oanda_symbol: US30_USD
+    alignment: us_index
+
+  - name: UK100
+    asset_class: index
+    oanda_symbol: UK100_GBP
+    alignment: uk_index
+
+  # ── Commodities ──────────────────────────────────────────────────────────
+  - name: USOIL
+    asset_class: commodity
+    oanda_symbol: WTICO_USD
+    alignment: oil
+    display_scale: 1
+    exclude_from_triggers: false
+
+  - name: XAUUSD
+    asset_class: commodity
+    oanda_symbol: XAU_USD
+    alignment: metal
+
+  - name: XAGUSD
+    asset_class: commodity
+    oanda_symbol: XAG_USD
+    alignment: metal
+
+  # ── Crypto ───────────────────────────────────────────────────────────────
+  # BTCUSD and ETHUSD use 17:00 NY daily/H4 grid (matching reference bot BTCUSD)
+  - name: BTCUSD
+    asset_class: crypto
+    oanda_symbol: null
+    binance_symbol: BTCUSDT
+    bybit_symbol: BTCUSDT
+    coinbase_symbol: BTC-USD
+    alignment: crypto_ny17
+
+  - name: ETHUSD
+    asset_class: crypto
+    oanda_symbol: null
+    binance_symbol: ETHUSDT
+    bybit_symbol: ETHUSDT
+    coinbase_symbol: ETH-USD
+    alignment: crypto_ny17
+
+  # BTCUSDT and ETHUSDT use 00:00 UTC grid (matching reference bot BTCUSDT / ETHUSDT)
+  - name: BTCUSDT
+    asset_class: crypto
+    oanda_symbol: null
+    binance_symbol: BTCUSDT
+    bybit_symbol: BTCUSDT
+    coinbase_symbol: BTC-USDT
+    alignment: crypto
+
+  - name: ETHUSDT
+    asset_class: crypto
+    oanda_symbol: null
+    binance_symbol: ETHUSDT
+    bybit_symbol: ETHUSDT
+    coinbase_symbol: ETH-USDT
+    alignment: crypto

@@ -1,0 +1,22 @@
+services:
+  slk_bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: slk_bias_bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      # Mount storage directory so candle cache, state, and price alerts persist across container restarts
+      - ./slk_bot/storage:/app/slk_bot/storage
+      # Mount configuration files for live updates without rebuild
+      - ./slk_bot/config:/app/slk_bot/config
+    environment:
+      - PYTHONUNBUFFERED=1
+      - TZ=UTC
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"

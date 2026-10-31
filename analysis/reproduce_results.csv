@@ -1,0 +1,42 @@
+ref_idx,symbol,direction,pair,ref_rej,ref_kl,ref_bo_price,ref_bo_time,match_type,diagnosis,is_sweep
+0,EURGBP,SELL,D1->H4,2026-10-07 21:00:00+00:00,0.84822,0.84574,2026-10-12 05:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",False
+1,GBPCHF,BUY,D1->H4,2026-10-08 21:00:00+00:00,1.09822,1.10028,2026-10-12 05:00:00+00:00,PARTIAL,"BO time match, but rej candle 2026-10-11 21:00:00+00:00 vs ref 2026-10-08 21:00:00+00:00",False
+2,BTCUSD,SELL,D1->H4,2026-10-10 21:00:00+00:00,84012.32,82881.23,2026-10-12 09:00:00+00:00,MISSING,Candidates exist on BTCUSD but none matched rejection or breakout,False
+3,EURUSD,SELL,D1->H4,2026-10-08 21:00:00+00:00,1.12426,1.11826,2026-10-12 09:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",False
+4,EURUSD,SELL,D1->H4,2026-10-08 21:00:00+00:00,1.12426,1.11826,2026-10-12 09:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",True
+5,AUDNZD,BUY,D1->H4,2026-10-06 21:00:00+00:00,1.24082,1.24496,2026-10-12 09:00:00+00:00,PARTIAL,"BO time match, but rej candle 2026-10-06 21:00:00+00:00 vs ref 2026-10-06 21:00:00+00:00",False
+6,AUDNZD,BUY,D1->H4,2026-10-06 21:00:00+00:00,1.24082,1.24496,2026-10-12 09:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",True
+7,NZDUSD,SELL,D1->H4,2026-10-08 21:00:00+00:00,0.56238,0.55886,2026-10-12 13:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",False
+8,NZDUSD,SELL,D1->H4,2026-10-08 21:00:00+00:00,0.56238,0.55886,2026-10-12 13:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",True
+9,EURCAD,SELL,D1->H4,2026-10-08 21:00:00+00:00,1.59976,1.5942,2026-10-12 13:00:00+00:00,PARTIAL,"BO time match, but rej candle 2026-10-08 21:00:00+00:00 vs ref 2026-10-08 21:00:00+00:00",False
+10,AUDUSD,SELL,D1->H4,2026-10-11 21:00:00+00:00,0.69838,0.69726,2026-10-12 05:00:00+00:00,PARTIAL,"BO time match, but rej candle 2026-10-11 21:00:00+00:00 vs ref 2026-10-11 21:00:00+00:00",False
+11,EURJPY,SELL,D1->H4,2026-10-08 21:00:00+00:00,177.736,176.902,2026-10-12 21:00:00+00:00,PARTIAL,"BO time match, but rej candle 2026-10-08 21:00:00+00:00 vs ref 2026-10-08 21:00:00+00:00",False
+12,EURJPY,SELL,D1->H4,2026-10-08 21:00:00+00:00,177.736,176.902,2026-10-12 21:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",True
+13,AUDJPY,SELL,D1->H4,2026-10-11 21:00:00+00:00,110.542,110.302,2026-10-12 21:00:00+00:00,PARTIAL,"BO time match, but rej candle 2026-10-11 21:00:00+00:00 vs ref 2026-10-11 21:00:00+00:00",False
+14,EURNZD,SELL,D1->H4,2026-10-11 21:00:00+00:00,1.99972,1.99548,2026-10-13 05:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",False
+15,NZDJPY,BUY,D1->H4,2026-10-11 21:00:00+00:00,88.62,88.87,2026-10-13 13:00:00+00:00,MISSING,Candidates exist on NZDJPY but none matched rejection or breakout,False
+16,GBPCHF,BUY,D1->H4,2026-10-12 21:00:00+00:00,1.10109,1.10254,2026-10-13 05:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",False
+17,NZDJPY,BUY,D1->H4,2026-10-12 21:00:00+00:00,88.482,88.76,2026-10-13 09:00:00+00:00,PARTIAL,"Same rejection/level, but BO price 88.646 vs ref 88.76",False
+18,USOIL,BUY,W1->D1,2026-10-04 21:00:00+00:00,89.831,95.388,2026-10-12 21:00:00+00:00,PARTIAL,"BO time match, but rej candle 2026-09-27 21:00:00+00:00 vs ref 2026-10-04 21:00:00+00:00",False
+19,USOIL,BUY,W1->D1,2026-10-04 21:00:00+00:00,89.831,95.388,2026-10-12 21:00:00+00:00,PARTIAL,"BO time match, but rej candle 2026-09-27 21:00:00+00:00 vs ref 2026-10-04 21:00:00+00:00",True
+20,GBPJPY,BUY,D1->H4,2026-10-12 21:00:00+00:00,208.893,209.914,2026-10-13 21:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",False
+21,XAGUSD,SELL,D1->H4,2026-10-11 21:00:00+00:00,61.3495,58.8805,2026-10-14 05:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",False
+22,AUDCAD,BUY,D1->H4,2026-10-12 21:00:00+00:00,0.99212,0.99416,2026-10-14 05:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",False
+23,AUDNZD,BUY,D1->H4,2026-10-12 21:00:00+00:00,1.24334,1.24564,2026-10-14 05:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",False
+24,USDCHF,BUY,D1->H4,2026-10-12 21:00:00+00:00,0.8315,0.83472,2026-10-14 09:00:00+00:00,PARTIAL,"Same rejection/level, but BO price 0.83322 vs ref 0.83472, BO time 2026-10-14 05:00:00+00:00 vs ref 2026-10-14 09:00:00+00:00",False
+25,USDJPY,BUY,D1->H4,2026-10-12 21:00:00+00:00,157.902,158.652,2026-10-14 09:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",False
+26,CHFJPY,SELL,D1->H4,2026-10-12 21:00:00+00:00,190.399,189.516,2026-10-14 13:00:00+00:00,MISSING,Candidates exist on CHFJPY but none matched rejection or breakout,False
+27,GBPNZD,BUY,D1->H4,2026-10-13 21:00:00+00:00,2.35774,2.36149,2026-10-14 09:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",False
+28,GBPNZD,BUY,D1->H4,2026-10-13 21:00:00+00:00,2.35774,2.36149,2026-10-14 09:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",True
+29,NZDCHF,SELL,D1->H4,2026-10-13 21:00:00+00:00,0.46821,0.46734,2026-10-14 17:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",False
+30,AUDUSD,SELL,D1->H4,2026-10-13 21:00:00+00:00,0.7012,0.69534,2026-10-14 21:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",False
+31,AUDJPY,SELL,D1->H4,2026-10-12 21:00:00+00:00,110.58,110.046,2026-10-14 21:00:00+00:00,MISSING,Candidates exist on AUDJPY but none matched rejection or breakout,False
+32,AUDCHF,SELL,D1->H4,2026-10-13 21:00:00+00:00,0.58388,0.58146,2026-10-14 21:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",False
+33,GER40,SELL,D1->H4,2026-10-13 21:00:00+00:00,25295.0,25252.6,2026-10-14 21:00:00+00:00,MISSING,Candidates exist on GER40 but none matched rejection or breakout,False
+34,US30,BUY,D1->H4,2026-10-13 21:00:00+00:00,51476.0,51885.2,2026-10-15 09:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",False
+35,USDCAD,SELL,D1->H4,2026-10-13 21:00:00+00:00,1.42824,1.41989,2026-10-15 13:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",False
+36,EURCHF,SELL,D1->H4,2026-10-11 21:00:00+00:00,0.93244,0.92904,2026-10-15 13:00:00+00:00,PARTIAL,"Same rejection/level, but BO price 0.93116 vs ref 0.92904, BO time 2026-10-12 17:00:00+00:00 vs ref 2026-10-15 13:00:00+00:00",False
+37,SPX500,BUY,D1->H4,2026-10-14 21:00:00+00:00,7679.8,7710.6,2026-10-15 13:00:00+00:00,MISSING,Candidates exist on SPX500 but none matched rejection or breakout,False
+38,EURGBP,SELL,D1->H4,2026-10-14 21:00:00+00:00,0.84743,0.84282,2026-10-16 13:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",False
+39,BTCUSDT,SELL,D1->H4,2026-10-16 00:00:00+00:00,82635.55,82126.01,2026-10-16 12:00:00+00:00,MATCH,"Exact match on rejection, key level, BO price and BO candle time",True
+40,ETHUSDT,SELL,D1->H4,2026-10-16 00:00:00+00:00,2490.16,2440.22,2026-10-16 12:00:00+00:00,PARTIAL,"BO time match, but rej candle 2026-10-16 00:00:00+00:00 vs ref 2026-10-16 00:00:00+00:00",False

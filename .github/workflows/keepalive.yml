@@ -1,0 +1,24 @@
+name: Keepalive Workflow
+
+on:
+  schedule:
+    # Runs at 00:00 UTC on day 1 of every month
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+
+jobs:
+  keepalive:
+    name: GitHub Actions Schedule Keepalive
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: write
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Keep Workflow Active
+        uses: gautamkrishnar/keepalive-workflow@v2
+        with:
+          gh_token: ${{ secrets.GITHUB_TOKEN }}
+          commit_message: "chore: automated schedule keepalive [skip ci]"

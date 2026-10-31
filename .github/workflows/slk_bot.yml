@@ -1,0 +1,143 @@
+name: SLK Bias Bot Runner
+
+on:
+  schedule:
+    # Off-peak cron every 15 minutes: 7, 22, 37, 52 past each hour
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+    inputs:
+      force_scan:
+        description: 'Force a full candle fetch and setup scan cycle'
+        required: false
+        type: boolean
+        default: false
+      dry_run:
+        description: 'Dry run mode (logs to console without live Telegram push)'
+        required: false
+        type: boolean
+        default: false
+      silent_first_start:
+        description: 'Silent first start (seed history without alerts)'
+        required: false
+        type: boolean
+        default: false
+
+concurrency:
+  group: slk-bot-execution
+  cancel-in-progress: false
+
+jobs:
+  run-slk-bot:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Restore State from bot-data Orphan Branch
+        run: |
+          echo "Checking for bot-data state branch..."
+          if git ls-remote --heads origin bot-data | grep -q bot-data; then
+            echo "Restoring state from orphan branch bot-data..."
+            git fetch origin bot-data:bot-data --depth=1
+            git checkout bot-data -- state/ || true
+            if [ -d "state" ]; then
+              mkdir -p slk_bot/storage
+              [ -f state/candles.db ] && cp state/candles.db slk_bot/storage/candles.db
+              [ -f state/alerts_log.csv ] && cp state/alerts_log.csv alerts_log.csv
+              [ -f state/state.json ] && cp state/state.json slk_bot/storage/state.json
+              echo "State files restored successfully."
+              ls -lh slk_bot/storage/
+            fi
+          else
+            echo "Branch bot-data does not exist yet. Will be initialized on first run."
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run SLK Bias Bot (Run-Once)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          OANDA_API_KEY: ${{ secrets.OANDA_API_KEY }}
+          OANDA_ACCOUNT_ID: ${{ secrets.OANDA_ACCOUNT_ID }}
+          OANDA_ENVIRONMENT: ${{ secrets.OANDA_ENVIRONMENT || 'practice' }}
+          COINBASE_API_KEY: ${{ secrets.COINBASE_API_KEY }}
+        run: |
+          EXTRA_ARGS=""
+          if [ "${{ github.event.inputs.force_scan }}" = "true" ]; then
+            EXTRA_ARGS="$EXTRA_ARGS --force-scan"
+          fi
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            EXTRA_ARGS="$EXTRA_ARGS --dry-run"
+          fi
+          if [ "${{ github.event.inputs.silent_first_start }}" = "true" ]; then
+            EXTRA_ARGS="$EXTRA_ARGS --silent-first-start"
+          fi
+          python run_once.py $EXTRA_ARGS
+
+      - name: Notify on Failure via Telegram
+        if: failure()
+        run: |
+          if [ -n "${{ secrets.TELEGRAM_BOT_TOKEN }}" ] && [ -n "${{ secrets.TELEGRAM_CHAT_ID }}" ]; then
+            MSG="⚠️ <b>SLK Bot Workflow Failed</b>%0ARun ID: ${{ github.run_id }}%0ACommit: ${{ github.sha }}%0ACheck GitHub Actions logs for details."
+            curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+              -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+              -d "text=${MSG}" \
+              -d "parse_mode=HTML" || true
+          fi
+
+      - name: Persist State to bot-data Orphan Branch
+        if: always()
+        run: |
+          echo "Persisting state..."
+          mkdir -p state
+          [ -f slk_bot/storage/candles.db ] && cp slk_bot/storage/candles.db state/candles.db
+          [ -f alerts_log.csv ] && cp alerts_log.csv state/alerts_log.csv
+          [ -f slk_bot/storage/state.json ] && cp slk_bot/storage/state.json state/state.json
+
+          if [ -f state/candles.db ] || [ -f state/state.json ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+
+            # Create clean orphan branch with single commit
+            git checkout --orphan bot-data-stage
+            git rm -rf . > /dev/null 2>&1 || true
+
+            mkdir -p state
+            [ -f slk_bot/storage/candles.db ] && cp slk_bot/storage/candles.db state/candles.db
+            [ -f alerts_log.csv ] && cp alerts_log.csv state/alerts_log.csv
+            [ -f slk_bot/storage/state.json ] && cp slk_bot/storage/state.json state/state.json
+
+            cat << 'EOF' > README.md
+          # SLK Bot State Store (Orphan Branch)
+
+          This dedicated orphan branch (`bot-data`) stores state files across GitHub Actions runs:
+          - `state/candles.db`: Local SQLite candle cache & dedupe history
+          - `state/alerts_log.csv`: Historical alerts CSV
+          - `state/state.json`: Last run timestamps, candle close times & Telegram update offset
+
+          This branch is overwritten on every run via single commit force-push to prevent repository history bloat.
+          EOF
+
+            git add -f state/ README.md
+            git commit -m "chore(state): update bot state [skip ci]"
+            git push --force origin bot-data-stage:bot-data
+            echo "State committed and pushed to bot-data orphan branch."
+          else
+            echo "No state files found to persist."
+          fi

@@ -1,0 +1,93 @@
+=====================================================================================
+ HTF TRIGGER FREQUENCY REPORT
+ Generated: 2026-10-19 | Daily: Last 12 Months | Weekly: Last 24 Months
+=====================================================================================
+
+--- DAILY TIMEFRAME (LAST 12 MONTHS: 2025-10-19 to 2026-10-19) ---
+Symbol     | Class       | Method 1  | Method 2  | Method 3  | Total   | Avg/Mo  
+--------------------------------------------------------------------------------
+EURUSD     | forex       | 192       | 27        | 32        | 251     | 20.92   
+GBPUSD     | forex       | 198       | 32        | 32        | 262     | 21.83   
+USDJPY     | forex       | 195       | 30        | 26        | 251     | 20.92   
+USDCHF     | forex       | 196       | 29        | 25        | 250     | 20.83   
+USDCAD     | forex       | 186       | 26        | 37        | 249     | 20.75   
+AUDUSD     | forex       | 206       | 36        | 22        | 264     | 22.00   
+NZDUSD     | forex       | 203       | 32        | 35        | 270     | 22.50   
+EURGBP     | forex       | 201       | 41        | 30        | 272     | 22.67   
+EURJPY     | forex       | 184       | 33        | 29        | 246     | 20.50   
+EURCHF     | forex       | 200       | 39        | 30        | 269     | 22.42   
+EURCAD     | forex       | 217       | 29        | 29        | 275     | 22.92   
+EURAUD     | forex       | 190       | 41        | 23        | 254     | 21.17   
+EURNZD     | forex       | 203       | 31        | 37        | 271     | 22.58   
+GBPJPY     | forex       | 193       | 35        | 22        | 250     | 20.83   
+GBPCHF     | forex       | 202       | 44        | 26        | 272     | 22.67   
+GBPCAD     | forex       | 202       | 40        | 31        | 273     | 22.75   
+GBPAUD     | forex       | 182       | 43        | 35        | 260     | 21.67   
+GBPNZD     | forex       | 206       | 28        | 37        | 271     | 22.58   
+AUDJPY     | forex       | 193       | 29        | 24        | 246     | 20.50   
+AUDCAD     | forex       | 192       | 30        | 33        | 255     | 21.25   
+AUDCHF     | forex       | 189       | 38        | 28        | 255     | 21.25   
+AUDNZD     | forex       | 190       | 30        | 21        | 241     | 20.08   
+NZDJPY     | forex       | 198       | 38        | 26        | 262     | 21.83   
+NZDCAD     | forex       | 200       | 33        | 32        | 265     | 22.08   
+NZDCHF     | forex       | 210       | 40        | 29        | 279     | 23.25   
+CADJPY     | forex       | 193       | 34        | 24        | 251     | 20.92   
+CADCHF     | forex       | 220       | 37        | 22        | 279     | 23.25   
+CHFJPY     | forex       | 184       | 35        | 27        | 246     | 20.50   
+NAS100     | index       | 178       | 34        | 27        | 239     | 19.92   
+SPX500     | index       | 181       | 32        | 27        | 240     | 20.00   
+GER40      | index       | 178       | 34        | 32        | 244     | 20.33   
+US30       | index       | 185       | 37        | 29        | 251     | 20.92   
+UK100      | index       | 176       | 24        | 35        | 235     | 19.58   
+USOIL      | commodity   | 195       | 32        | 24        | 251     | 20.92   
+XAUUSD     | commodity   | 181       | 39        | 24        | 244     | 20.33   
+XAGUSD     | commodity   | 183       | 27        | 28        | 238     | 19.83   
+BTCUSD     | crypto      | 258       | 54        | 29        | 341     | 28.42   
+ETHUSD     | crypto      | 251       | 47        | 41        | 339     | 28.25   
+--------------------------------------------------------------------------------
+PORTFOLIO  | TOTAL       | 7491      | 1320      | 1100      | 9911    | 825.92  
+
+
+--- WEEKLY TIMEFRAME (LAST 24 MONTHS: 2024-10-19 to 2026-10-19) ---
+Symbol     | Class       | Method 1  | Method 2  | Method 3  | Total   | Avg/Mo  
+--------------------------------------------------------------------------------
+EURUSD     | forex       | 80        | 13        | 8         | 101     | 4.21    
+GBPUSD     | forex       | 84        | 13        | 11        | 108     | 4.50    
+USDJPY     | forex       | 78        | 17        | 15        | 110     | 4.58    
+USDCHF     | forex       | 74        | 11        | 11        | 96      | 4.00    
+USDCAD     | forex       | 70        | 10        | 12        | 92      | 3.83    
+AUDUSD     | forex       | 74        | 12        | 10        | 96      | 4.00    
+NZDUSD     | forex       | 79        | 10        | 10        | 99      | 4.12    
+EURGBP     | forex       | 80        | 14        | 10        | 104     | 4.33    
+EURJPY     | forex       | 74        | 12        | 8         | 94      | 3.92    
+EURCHF     | forex       | 75        | 16        | 10        | 101     | 4.21    
+EURCAD     | forex       | 71        | 12        | 11        | 94      | 3.92    
+EURAUD     | forex       | 77        | 16        | 7         | 100     | 4.17    
+EURNZD     | forex       | 73        | 15        | 10        | 98      | 4.08    
+GBPJPY     | forex       | 73        | 14        | 16        | 103     | 4.29    
+GBPCHF     | forex       | 77        | 15        | 13        | 105     | 4.38    
+GBPCAD     | forex       | 70        | 23        | 14        | 107     | 4.46    
+GBPAUD     | forex       | 71        | 14        | 11        | 96      | 4.00    
+GBPNZD     | forex       | 70        | 17        | 13        | 100     | 4.17    
+AUDJPY     | forex       | 74        | 15        | 11        | 100     | 4.17    
+AUDCAD     | forex       | 77        | 14        | 12        | 103     | 4.29    
+AUDCHF     | forex       | 78        | 19        | 9         | 106     | 4.42    
+AUDNZD     | forex       | 70        | 19        | 10        | 99      | 4.12    
+NZDJPY     | forex       | 76        | 14        | 8         | 98      | 4.08    
+NZDCAD     | forex       | 73        | 14        | 18        | 105     | 4.38    
+NZDCHF     | forex       | 79        | 18        | 8         | 105     | 4.38    
+CADJPY     | forex       | 83        | 10        | 9         | 102     | 4.25    
+CADCHF     | forex       | 71        | 22        | 10        | 103     | 4.29    
+CHFJPY     | forex       | 63        | 14        | 13        | 90      | 3.75    
+NAS100     | index       | 60        | 20        | 11        | 91      | 3.79    
+SPX500     | index       | 68        | 24        | 4         | 96      | 4.00    
+GER40      | index       | 72        | 14        | 10        | 96      | 4.00    
+US30       | index       | 65        | 17        | 10        | 92      | 3.83    
+UK100      | index       | 53        | 16        | 16        | 85      | 3.54    
+USOIL      | commodity   | 74        | 10        | 6         | 90      | 3.75    
+XAUUSD     | commodity   | 53        | 21        | 7         | 81      | 3.38    
+XAGUSD     | commodity   | 58        | 15        | 16        | 89      | 3.71    
+BTCUSD     | crypto      | 69        | 17        | 14        | 100     | 4.17    
+ETHUSD     | crypto      | 72        | 7         | 14        | 93      | 3.88    
+--------------------------------------------------------------------------------
+PORTFOLIO  | TOTAL       | 2738      | 574       | 416       | 3728    | 155.33  

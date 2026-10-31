@@ -1,0 +1,30 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+
+# Environment and sensitive keys (CRITICAL FOR PUBLIC REPOS)
+.env
+.env.txt
+*.env
+*.key
+*.pem
+
+# Local data & caches
+*.db
+*.sqlite
+*.sqlite3
+state/
+data/cache/
+logs/
+local_logs/
+*.log
+alerts_log.csv
+*.zip
+.system_generated/
+
+# OS
+.DS_Store
+Thumbs.db

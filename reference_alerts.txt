@@ -1,0 +1,765 @@
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+🚨 SELL · EURGBP · D1→H4
+External breakout confirmed
+
+Rejected at Open-Close KL @ 0.84822.
+
+External BO @ 0.84574 · Mon 12 Oct, 06:00
+Rejected on Wed 7 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 12 Oct, 10:00 AM WAT
+
+🚨 BUY · GBPCHF · D1→H4
+External breakout confirmed
+
+Rejected at V-shape KL @ 1.09822.
+
+External BO @ 1.10028 · Mon 12 Oct, 06:00
+Rejected on Thu 8 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 12 Oct, 10:00 AM WAT
+
+🚨 SELL · BTCUSD · D1→H4
+External breakout confirmed
+
+Rejected at Open-Close KL @ 84012.32000.
+
+External BO @ 82881.23000 · Mon 12 Oct, 10:00
+Rejected on Sat 10 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 12 Oct, 2:00 PM WAT
+
+🚨 SELL · EURUSD · D1→H4
+External breakout confirmed
+
+Rejected at V-shape KL @ 1.12426.
+
+External BO @ 1.11826 · Mon 12 Oct, 10:00
+Rejected on Thu 8 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 12 Oct, 2:00 PM WAT
+
+🚨 SELL · EURUSD · D1→H4
+External breakout confirmed
+
+Swept previous candle high 1.12269, closed back below; rejected fresh V-shape KL @ 1.12426.
+
+External BO @ 1.11826 · Mon 12 Oct, 10:00
+Rejected on Thu 8 Oct, 22:00
+Key level 1.12426 · formed 1 Oct 2026
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 12 Oct, 2:00 PM WAT
+
+🚨 BUY · AUDNZD · D1→H4
+External breakout confirmed
+
+Rejected at Open-Close KL @ 1.24082.
+
+External BO @ 1.24496 · Mon 12 Oct, 10:00
+Rejected on Tue 6 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 12 Oct, 2:00 PM WAT
+
+🚨 BUY · AUDNZD · D1→H4
+External breakout confirmed
+
+Swept previous candle low 1.24088, closed back above; rejected fresh Open-Close KL @ 1.24082.
+
+External BO @ 1.24496 · Mon 12 Oct, 10:00
+Rejected on Tue 6 Oct, 22:00
+Key level 1.24082 · formed 23 Sep 2026
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 12 Oct, 2:00 PM WAT
+
+🚨 SELL · NZDUSD · D1→H4
+External breakout confirmed
+
+Rejected at A-shape KL @ 0.56238.
+
+External BO @ 0.55886 · Mon 12 Oct, 14:00
+Rejected on Thu 8 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 12 Oct, 6:00 PM WAT
+
+🚨 SELL · NZDUSD · D1→H4
+External breakout confirmed
+
+Swept previous candle high 0.56134, closed back below; rejected fresh A-shape KL @ 0.56238.
+
+External BO @ 0.55886 · Mon 12 Oct, 14:00
+Rejected on Thu 8 Oct, 22:00
+Key level 0.56238 · formed 6 Oct 2026
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 12 Oct, 6:00 PM WAT
+
+🚨 SELL · EURCAD · D1→H4
+External breakout confirmed
+
+Rejected at Open-Close KL @ 1.59976.
+
+External BO @ 1.59420 · Mon 12 Oct, 14:00
+Rejected on Thu 8 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 12 Oct, 6:00 PM WAT
+
+🚨 SELL · AUDUSD · D1→H4
+External breakout confirmed
+
+Rejected at A-shape KL @ 0.69838.
+
+External BO @ 0.69726 · Mon 12 Oct, 06:00
+Rejected on Sun 11 Oct, 22:00
+Trend aligned with D1
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 12 Oct, 10:00 PM WAT
+
+🚨 SELL · EU50 · D1→H4
+External breakout confirmed
+
+Rejected at V-shape KL @ 6225.60000.
+
+External BO @ 6183.90000 · Mon 12 Oct, 22:00
+Rejected on Sun 11 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 13 Oct, 2:00 AM WAT
+
+🚨 SELL · EU50 · D1→H4
+External breakout confirmed
+
+Swept previous candle high 6211.90000, closed back below; rejected fresh V-shape KL @ 6225.60000.
+
+External BO @ 6183.90000 · Mon 12 Oct, 22:00
+Rejected on Sun 11 Oct, 22:00
+Key level 6225.60000 · formed 28 Jun 2026
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 13 Oct, 2:00 AM WAT
+
+🚨 SELL · EURJPY · D1→H4
+External breakout confirmed
+
+Rejected at Open-Close KL @ 177.73600.
+
+External BO @ 176.90200 · Mon 12 Oct, 22:00
+Rejected on Thu 8 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 13 Oct, 2:00 AM WAT
+
+🚨 SELL · EURJPY · D1→H4
+External breakout confirmed
+
+Swept previous candle high 177.44500, closed back below; rejected fresh Open-Close KL @ 177.73600.
+
+External BO @ 176.90200 · Mon 12 Oct, 22:00
+Rejected on Thu 8 Oct, 22:00
+Key level 177.73600 · formed 1 Oct 2026
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 13 Oct, 2:00 AM WAT
+
+🚨 SELL · AUDJPY · D1→H4
+External breakout confirmed
+
+Rejected at Open-Close KL @ 110.54200.
+
+External BO @ 110.30200 · Mon 12 Oct, 22:00
+Rejected on Sun 11 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 13 Oct, 2:00 AM WAT
+
+🚨 SELL · EURNZD · D1→H4
+External breakout confirmed
+
+Rejected at V-shape KL @ 1.99972.
+
+External BO @ 1.99548 · Tue 13 Oct, 06:00
+Rejected on Sun 11 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 13 Oct, 10:00 AM WAT
+
+🚨 BUY · NZDJPY · D1→H4
+External breakout confirmed
+
+Rejected at V-shape KL @ 88.62000.
+
+External BO @ 88.87000 · Tue 13 Oct, 14:00
+Rejected on Sun 11 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 13 Oct, 6:00 PM WAT
+
+🚨 BUY · GBPCHF · D1→H4
+External breakout confirmed
+
+Rejected at V-shape KL @ 1.10109.
+
+External BO @ 1.10254 · Tue 13 Oct, 06:00
+Rejected on Mon 12 Oct, 22:00
+Trend aligned with D1
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 13 Oct, 10:00 PM WAT
+
+🚨 BUY · NZDJPY · D1→H4
+External breakout confirmed
+
+Rejected at A-shape KL @ 88.48200.
+
+External BO @ 88.76000 · Tue 13 Oct, 10:00
+Rejected on Mon 12 Oct, 22:00
+Trend aligned with D1
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 13 Oct, 10:00 PM WAT
+
+🚨 BUY · USOIL · W1→D1
+External breakout confirmed
+
+Rejected at A-shape KL @ 89.83100.
+
+External BO @ 95.38800 · Mon 12 Oct, 22:00
+Rejected on Sun 4 Oct, 22:00
+Trend aligned with W1
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 13 Oct, 10:00 PM WAT
+
+🚨 BUY · USOIL · W1→D1
+External breakout confirmed
+
+Swept previous candle low 90.50800, closed back above; rejected fresh A-shape KL @ 89.83100.
+
+External BO @ 95.38800 · Mon 12 Oct, 22:00
+Rejected on Sun 4 Oct, 22:00
+Key level 89.83100 · formed 22 Oct 2023
+Trend aligned with W1
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 13 Oct, 10:00 PM WAT
+
+🚨 BUY · GBPJPY · D1→H4
+External breakout confirmed
+
+Rejected at V-shape KL @ 208.89300.
+
+External BO @ 209.91400 · Tue 13 Oct, 22:00
+Rejected on Mon 12 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 14 Oct, 2:01 AM WAT
+
+High-impact news in the next 24 hours
+
+Wed 14 Oct, 13:30
+USD: Core CPI m/m
+USD: Core CPI y/y
+USD: CPI m/m
+USD: CPI y/y
+
+Thu 15 Oct, 01:30
+AUD: Employment Change
+AUD: Unemployment Rate
+
+Thu 15 Oct, 07:00
+GBP: GDP m/m
+
+Sent 14 Oct, 7:00 AM WAT
+
+🚨 SELL · XAGUSD · D1→H4
+External breakout confirmed
+
+Rejected at A-shape KL @ 61.34950.
+
+External BO @ 58.88050 · Wed 14 Oct, 06:00
+Rejected on Sun 11 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+⚠️ ERL taken · price has already reached the range low @ 58.50450
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 14 Oct, 10:00 AM WAT
+
+🚨 BUY · AUDCAD · D1→H4
+External breakout confirmed
+
+Rejected at A-shape KL @ 0.99212.
+
+External BO @ 0.99416 · Wed 14 Oct, 06:00
+Rejected on Mon 12 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 14 Oct, 10:00 AM WAT
+
+🚨 BUY · AUDNZD · D1→H4
+External breakout confirmed
+
+Rejected at A-shape KL @ 1.24334.
+
+External BO @ 1.24564 · Wed 14 Oct, 06:00
+Rejected on Mon 12 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+⚠️ ERL taken · price has already reached the range high @ 1.24618
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 14 Oct, 10:00 AM WAT
+
+🚨 BUY · USDCHF · D1→H4
+External breakout confirmed
+
+Rejected at V-shape KL @ 0.83150.
+
+External BO @ 0.83472 · Wed 14 Oct, 10:00
+Rejected on Mon 12 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+⚠️ ERL taken · price has already reached the range high @ 0.83486
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 14 Oct, 2:01 PM WAT
+
+🚨 BUY · USDJPY · D1→H4
+External breakout confirmed
+
+Rejected at V-shape KL @ 157.90200.
+
+External BO @ 158.65200 · Wed 14 Oct, 10:00
+Rejected on Mon 12 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+⚠️ ERL taken · price has already reached the range high @ 158.75400
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 14 Oct, 2:01 PM WAT
+
+🚨 SELL · CHFJPY · D1→H4
+External breakout confirmed
+
+Rejected at A-shape KL @ 190.39900.
+
+External BO @ 189.51600 · Wed 14 Oct, 14:00
+Rejected on Mon 12 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 14 Oct, 6:00 PM WAT
+
+🚨 BUY · GBPNZD · D1→H4
+External breakout confirmed
+
+Rejected at V-shape KL @ 2.35774.
+
+External BO @ 2.36149 · Wed 14 Oct, 10:00
+Rejected on Tue 13 Oct, 22:00
+Trend aligned with D1
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 14 Oct, 10:00 PM WAT
+
+🚨 BUY · GBPNZD · D1→H4
+External breakout confirmed
+
+Swept previous candle low 2.35855, closed back above; rejected fresh V-shape KL @ 2.35774.
+
+External BO @ 2.36149 · Wed 14 Oct, 10:00
+Rejected on Tue 13 Oct, 22:00
+Key level 2.35774 · formed 11 Oct 2026
+Trend aligned with D1
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 14 Oct, 10:00 PM WAT
+
+🚨 SELL · NZDCHF · D1→H4
+External breakout confirmed
+
+Rejected at V-shape KL @ 0.46821.
+
+External BO @ 0.46734 · Wed 14 Oct, 18:00
+Rejected on Tue 13 Oct, 22:00
+Trend aligned with D1
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 14 Oct, 10:00 PM WAT
+
+🚨 SELL · AUDUSD · D1→H4
+External breakout confirmed
+
+Rejected at Open-Close KL @ 0.70120.
+
+External BO @ 0.69534 · Wed 14 Oct, 22:00
+Rejected on Tue 13 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 15 Oct, 2:00 AM WAT
+
+🚨 SELL · AUDJPY · D1→H4
+External breakout confirmed
+
+Rejected at A-shape KL @ 110.58000.
+
+External BO @ 110.04600 · Wed 14 Oct, 22:00
+Rejected on Mon 12 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 15 Oct, 2:00 AM WAT
+
+🚨 SELL · AUDCHF · D1→H4
+External breakout confirmed
+
+Rejected at A-shape KL @ 0.58388.
+
+External BO @ 0.58146 · Wed 14 Oct, 22:00
+Rejected on Tue 13 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 15 Oct, 2:00 AM WAT
+
+🚨 SELL · GER40 · D1→H4
+External breakout confirmed
+
+Rejected at V-shape KL @ 25295.00000.
+
+External BO @ 25252.60000 · Wed 14 Oct, 22:00
+Rejected on Tue 13 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 15 Oct, 2:00 AM WAT
+
+High-impact news in the next 24 hours
+
+Thu 15 Oct, 13:30
+USD: Core PPI m/m
+USD: Core Retail Sales m/m
+USD: PPI m/m
+USD: Retail Sales m/m
+
+Fri 16 Oct, 03:00
+GBP: BOE Gov Bailey Speaks
+
+Fri 16 Oct, 04:30
+USD: Fed Chairman Warsh Speaks
+
+Sent 15 Oct, 7:00 AM WAT
+
+High-impact news in 1 hour
+Thu 15 Oct, 13:30
+USD: Core PPI m/m
+USD: Core Retail Sales m/m
+USD: PPI m/m
+USD: Retail Sales m/m
+Sent 15 Oct, 12:30 PM WAT
+
+🚨 BUY · US30 · D1→H4
+External breakout confirmed
+
+Rejected at Open-Close KL @ 51476.00000.
+
+External BO @ 51885.20000 · Thu 15 Oct, 10:00
+Rejected on Tue 13 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 15 Oct, 2:00 PM WAT
+
+🚨 SELL · USDCAD · D1→H4
+External breakout confirmed
+
+Rejected at A-shape KL @ 1.42824.
+
+External BO @ 1.41989 · Thu 15 Oct, 14:00
+Rejected on Tue 13 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+⚠️ ERL taken · price has already reached the range low @ 1.41970
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 15 Oct, 6:00 PM WAT
+
+🚨 SELL · EURCHF · D1→H4
+External breakout confirmed
+
+Rejected at Open-Close KL @ 0.93244.
+
+External BO @ 0.92904 · Thu 15 Oct, 14:00
+Rejected on Sun 11 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+⚠️ ERL taken · price has already reached the range low @ 0.92890
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 15 Oct, 6:00 PM WAT
+
+🚨 BUY · SPX500 · D1→H4
+External breakout confirmed
+
+Rejected at Open-Close KL @ 7679.80000.
+
+External BO @ 7710.60000 · Thu 15 Oct, 14:00
+Rejected on Wed 14 Oct, 22:00
+Trend aligned with D1
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 15 Oct, 10:00 PM WAT
+
+🚨 SELL · JPN225 · W1→D1
+External breakout confirmed
+
+Rejected at A-shape KL @ 69824.80000.
+
+External BO @ 65922.50000 · Wed 14 Oct, 22:00
+Rejected on Sun 27 Sep, 22:00
+Trend aligned with W1
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 15 Oct, 10:00 PM WAT
+
+🚨 BUY · DOTUSDT · D1→H4
+External breakout confirmed
+
+Rejected at V-shape KL @ 1.090.
+
+External BO @ 1.163 · Fri 16 Oct, 09:00
+Rejected on Thu 15 Oct, 01:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 16 Oct, 1:00 PM WAT
+
+🚨 SELL · EURGBP · D1→H4
+External breakout confirmed
+
+Rejected at A-shape KL @ 0.84743.
+
+External BO @ 0.84282 · Fri 16 Oct, 14:00
+Rejected on Wed 14 Oct, 22:00
+Trend aligned with D1
+✅ Next Day Rule · breakout after the rejection candle closed
+⚠️ ERL taken · price has already reached the range low @ 0.84434
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 16 Oct, 6:00 PM WAT
+
+🚨 SELL · BTCUSDT · D1→H4
+External breakout confirmed
+
+Swept previous candle high 82634.30, closed back below; rejected fresh Open-Close KL @ 82635.55.
+
+External BO @ 82126.01 · Fri 16 Oct, 13:00
+Rejected on Fri 16 Oct, 01:00
+Key level 82635.55 · formed 10 Oct 2026
+Trend aligned with D1
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 17 Oct, 1:00 AM WAT
+
+🚨 SELL · ETHUSDT · D1→H4
+External breakout confirmed
+
+Rejected at Open-Close KL @ 2490.16.
+
+External BO @ 2440.22 · Fri 16 Oct, 13:00
+Rejected on Fri 16 Oct, 01:00
+Trend aligned with D1
+
+All times shown are candle open times.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+
+Sent 17 Oct, 1:00 AM WAT

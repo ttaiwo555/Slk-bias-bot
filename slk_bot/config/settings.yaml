@@ -1,0 +1,171 @@
+feed_profile: forex_com
+profiles:
+  forex_com:
+    description: Default Owner profile with strict freshness, disrespect caps, and
+      age limits.
+    open_continuity_all: true
+    oanda_price: M
+    doji_body_threshold_pct: 0
+    max_disrespects: 3
+    ocl_max_disrespects: 1
+    unfresh_policy: false
+    age_rules:
+      timeframes:
+      - D
+      max_age_months: 6
+      max_age_months_disrespect_3: 4
+    grids:
+      forex: ny17
+      indices: ny17
+      metals: ny18
+      oil: utc_edges
+      crypto: ny17
+  reference_parity:
+    description: Settings used for reference bot parity runs.
+    open_continuity_all: false
+    oanda_price: M
+    doji_body_threshold_pct: 0
+    max_disrespects: null
+    ocl_max_disrespects: null
+    unfresh_policy: false
+    age_rules:
+      timeframes: []
+      max_age_months: null
+      max_age_months_disrespect_3: null
+    grids:
+      forex: ny17
+      indices: ny17
+      metals: ny17
+      oil: utc_edges
+      crypto: utc00
+data:
+  oanda_environment: practice
+  oanda_page_size: 5000
+  base_timeframe: H1
+  crypto_provider: coinbase
+  stale_threshold_minutes: 30
+alignment:
+  forex:
+    open_continuity: true
+    daily_open_time: '17:00'
+    daily_timezone: America/New_York
+    weekly_open_day: Sunday
+    h4_anchor: '17:00'
+    h4_anchor_timezone: America/New_York
+  crypto:
+    open_continuity: false
+    daily_open_time: 00:00
+    daily_timezone: UTC
+    weekly_open_day: Monday
+    h4_anchor: 00:00
+    h4_anchor_timezone: UTC
+  us_index:
+    open_continuity: true
+    daily_open_time: '17:00'
+    daily_timezone: America/New_York
+    weekly_open_day: Sunday
+    h4_anchor: '17:00'
+    h4_anchor_timezone: America/New_York
+  eu_index:
+    open_continuity: true
+    daily_open_time: '17:00'
+    daily_timezone: America/New_York
+    weekly_open_day: Sunday
+    h4_anchor: '17:00'
+    h4_anchor_timezone: America/New_York
+  uk_index:
+    open_continuity: true
+    daily_open_time: '17:00'
+    daily_timezone: America/New_York
+    weekly_open_day: Sunday
+    h4_anchor: '17:00'
+    h4_anchor_timezone: America/New_York
+  commodity:
+    open_continuity: true
+    daily_open_time: '17:00'
+    daily_timezone: America/New_York
+    weekly_open_day: Sunday
+    h4_anchor: '17:00'
+    h4_anchor_timezone: America/New_York
+  metal:
+    open_continuity: true
+    daily_open_time: '17:00'
+    daily_timezone: America/New_York
+    weekly_open_day: Sunday
+    h4_anchor: '17:00'
+    h4_anchor_timezone: America/New_York
+  metal_ny18:
+    open_continuity: true
+    daily_open_time: '17:00'
+    daily_timezone: America/New_York
+    weekly_open_day: Sunday
+    h4_anchor: '18:00'
+    h4_anchor_timezone: America/New_York
+  crypto_ny17:
+    open_continuity: false
+    daily_open_time: '17:00'
+    daily_timezone: America/New_York
+    weekly_open_day: Sunday
+    h4_anchor: '17:00'
+    h4_anchor_timezone: America/New_York
+  oil:
+    open_continuity: true
+    daily_open_time: '17:00'
+    daily_timezone: America/New_York
+    weekly_open_day: Sunday
+    h4_anchor: 00:00
+    h4_anchor_timezone: UTC
+strategy:
+  trend_alignment: required
+  trend_candidate: c
+  trend_evaluation_moment: alert_time
+  unfresh_policy: false
+  unfresh_alerts: false
+  lookback_weekly: 104
+  lookback_daily: 250
+  lookback_h4: 300
+  max_disrespects: 3
+  ocl_max_disrespects: 1
+  age_rules:
+    timeframes:
+    - D
+    max_age_months: 6
+    max_age_months_disrespect_3: 4
+  doji_body_threshold_pct: 0
+  sweep_lookback_candles: 1
+  marginal_threshold_pct:
+    forex: 0.02
+    commodity: 0.03
+    index: 0.2
+    crypto: 0.15
+  expiry_daily_trigger_candles: 3
+  expiry_weekly_trigger_candles: 14
+  primary_selection_rule: nearest_extreme
+  repeat_cooldown_trading_days: 0
+push_rules:
+  push_methods:
+  - 1
+  - 2
+  - 3
+  push_breakout_types:
+  - external
+  push_htf:
+  - W
+  - D
+  unfresh_alerts: false
+  digest_overflow_threshold: 5
+price_alerts:
+  check_interval_seconds: 60
+  expiry_hours: 48
+  tolerance_disclaimer: Feed prices can differ from your TradingView chart by up to
+    about 0.1% on indices and crypto.
+scheduler:
+  scan_interval_minutes: 5
+  stale_market_hours_warning: true
+telegram:
+  parse_mode: HTML
+  digest_max_per_batch: 5
+alert_preferences:
+  external_bo: false
+  internal_bo: false
+  trend_alignment: required

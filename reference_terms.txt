@@ -1,0 +1,56 @@
+Reading your bias alerts
+A bias alert says which way a market is leaning.
+
+SELL or BUY
+The way the bias points: down for SELL, up for BUY.
+
+D1→H4
+The two charts behind the alert. The first (D1, the Daily chart) shows the rejection and the second (H4, the 4 hour chart) shows the breakout. W1→D1 is the same one step up (W1 is the Weekly chart).
+
+Rejected at A-shape KL @ price
+On the first chart, price touched a key level (KL) and the candle closed back away from it. A KL is a price marked out by two neighbouring candles: an A-shape is a rising candle then a falling one (a peak), a V-shape is a falling candle then a rising one (a trough), and an Open-Close KL is two candles in a row moving the same way.
+
+Rejected on
+When the rejecting candle on the first chart opened.
+
+Swept previous candle high, closed back below
+Price pushed past the previous candle's high and then closed back under it (for a low, the other way round). An alert only starts this way if the same candle also rejected a fresh KL just beyond that point. Fresh means nothing has tested the level since it formed.
+
+Key level
+The fresh KL that candle rejected, and the date it formed.
+
+External breakout confirmed, External BO @
+BO means breakout. A candle on the second chart closed beyond the last turning point it made before price reached the key level, which confirms the bias. The price shown is that turning point.
+
+Internal breakout confirmed, Internal BO @
+An earlier, less certain confirmation, sent only if you switch it on in /alerts: the first small turning point made after price reached the key level was broken by a candle close.
+
+Trend
+Shown for D1; a W1 alert says W1 instead.
+"aligned with D1": the alert points the same way as that chart's trend (the direction set by its latest confirmed trend change).
+"against the D1 trend": it points the opposite way.
+"no D1 trend confirmed yet": there is no trend yet to compare with.
+Which of these you receive depends on the Trend aligned settings in /alerts.
+
+✅ Next Day Rule
+The breakout candle opened after the rejecting candle had closed, not inside it. It is a note on timing and never decides whether an alert is sent.
+
+⚠️ ERL taken
+ERL means external range liquidity. It is the highest wick of the range that price pulled back into (the lowest wick for a SELL), and it is usually where price heads after a rejection. This line appears when price had already reached it by the time the breakout candle closed, which makes the alert lower probability. It is a note and never decides whether an alert is sent.
+
+All times shown are candle open times.
+A candle is named by when it opened. So an H4 breakout shown at 14:00 closed at 18:00, and a Daily rejection shown at 22:00 on Tuesday was only confirmed when it closed, around 22:00 on Wednesday.
+
+Sent
+The small time at the very bottom is when the alert was created. It is not a candle time. It is the one time that names your time zone, and every other time uses that same zone.
+
+⚠️ Not an entry signal. Bias only — wait for your entry model.
+Your entry model is the set of entry rules you use yourself. These alerts only give a direction.
+
+Alert preferences
+✅ External BO confirmations: On
+⬜ Internal BO confirmations: Off
+Trend aligned rejections: Required
+Trend aligned sweeps: Required
+
+⚠️ Internal BOs are lower probability than External BOs. Turning them on may lower your win rate with the bot.

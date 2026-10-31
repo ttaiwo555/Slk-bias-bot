@@ -1,0 +1,122 @@
+"""
+analysis/inspect_item4_raw_engine.py
+------------------------------------
+Extract raw engine output for setups:
+  #20 USDCHF, #22 CHFJPY, #31 EURCHF, #32 SPX500
+Showing:
+  - Key level (kind, price, formation time, freshness)
+  - First-touch candle (time, OHLC)
+  - Candidate LTF turning points
+  - Which one was selected
+  - Comparison with reference breakout level and why it differs
+"""
+import sys
+from pathlib import Path
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+
+from slk_bot.storage.cache import CandleCache
+from slk_bot.strategy.triggers import detect_triggers
+from slk_bot.strategy.setups import (
+    evaluate_setup_lifecycle,
+    detect_ltf_levels,
+    find_mitigation_candle,
+    get_candle_close_time,
+    BreakoutType,
+)
+from slk_bot.strategy.models import TriggerDirection, LevelKind
+
+cache = CandleCache()
+ref_df = pd.read_csv(ROOT / "reference_setups.csv")
+
+target_ids = [20, 22, 31, 32]
+
+for tid in target_ids:
+    r = ref_df[ref_df["id"] == tid].iloc[0]
+    sym = r["symbol"]
+    rdir = r["dir"]
+    pair = r["pair"]
+    htf = "W" if "W1" in pair else "D"
+    ltf = "D" if "W1" in pair else "H4"
+    t_rej = pd.Timestamp(r["rej_open_utc"], tz="UTC")
+    t_bo = pd.Timestamp(r["bo_open_utc"], tz="UTC")
+    ref_kl = float(r["kl_price"])
+    ref_bo = float(r["bo_price"])
+    
+    print("=" * 80)
+    print(f"SETUP #{tid}: {sym} {rdir} ({pair})")
+    print(f"REFERENCE: KL={r['kl_kind']} {ref_kl}, BO={ref_bo} @ {r['bo_open_utc']} UTC")
+    print("-" * 80)
+    
+    df_htf = cache.load_candles(sym, htf)
+    df_ltf = cache.load_candles(sym, ltf)
+    
+    # Detect trigger
+    trigs = detect_triggers(
+        df_htf, htf, sym, "forex" if sym not in ("SPX500", "GER40") else "indices",
+        lookback=None, max_disrespects=None, ocl_max_disrespects=None, primary_selection_rule="fresh_first"
+    )
+    exp_dir = TriggerDirection.BEARISH if rdir == "SELL" else TriggerDirection.BULLISH
+    cands = [t for t in trigs if t.trigger_candle_time == t_rej and t.direction == exp_dir]
+    
+    if not cands:
+        print(f"  NO TRIGGER FOUND at {t_rej}!")
+        continue
+        
+    trig = cands[0]
+    p_lvl = trig.primary_level
+    print(f"Trigger: Method={trig.method.value}, Direction={trig.direction.value}")
+    if p_lvl:
+        print(f"Key Level: {p_lvl.kind.value} @ {p_lvl.price:.5f}, formed {p_lvl.formation_time}, Fresh={p_lvl.fresh}, Disrespects={p_lvl.disrespect_count}")
+    else:
+        print("Key Level: None")
+        
+    # First touch candle on LTF
+    t_close = get_candle_close_time(t_rej, htf)
+    sub_ltf = df_ltf[(df_ltf.index >= t_rej) & (df_ltf.index < t_close)]
+    first_touch_candle = None
+    first_touch_idx = None
+    if p_lvl and not sub_ltf.empty:
+        touches = sub_ltf[(sub_ltf["low"] <= p_lvl.price + 1e-6) & (sub_ltf["high"] >= p_lvl.price - 1e-6)]
+        if not touches.empty:
+            t_touch = touches.index[0]
+            first_touch_candle = touches.iloc[0]
+            first_touch_idx = int(df_ltf.index.get_loc(t_touch))
+            print(f"\nFirst-Touch Candle: {t_touch} (idx {first_touch_idx})")
+            print(f"  OHLC: O={first_touch_candle['open']:.5f}, H={first_touch_candle['high']:.5f}, L={first_touch_candle['low']:.5f}, C={first_touch_candle['close']:.5f}")
+            
+    # Run lifecycle with first_touch
+    ltf_levels = detect_ltf_levels(df_ltf, sym, ltf, 0.0)
+    setup = evaluate_setup_lifecycle(
+        trigger=trig,
+        htf_df=df_htf,
+        ltf_df=df_ltf,
+        daily_df=df_htf if htf == "D" else cache.load_candles(sym, "D"),
+        symbol=sym,
+        htf_tf=htf,
+        ltf_tf=ltf,
+        unfresh_alerts=True,
+        all_ltf_levels=ltf_levels,
+        external_ref_point="first_touch",
+    )
+    
+    print(f"\nMitigation Extreme X: {setup.timeline.extreme_price_x:.5f} at {setup.timeline.extreme_candle_time}")
+    print(f"Selected LX Level: {setup.timeline.lx_level.kind.value if setup.timeline.lx_level else 'None'} @ {setup.timeline.lx_level.price if setup.timeline.lx_level else 'None'}")
+    
+    # Candidate turning points before ref_idx
+    ref_idx = first_touch_idx if first_touch_idx is not None else setup.timeline.extreme_candle_index
+    if trig.direction == TriggerDirection.BULLISH:
+        cands_tp = [lvl for c_idx, lvl in ltf_levels if lvl.kind == LevelKind.A_SHAPE and lvl.formation_index <= ref_idx and lvl.price > setup.timeline.extreme_price_x]
+    else:
+        cands_tp = [lvl for c_idx, lvl in ltf_levels if lvl.kind == LevelKind.V_SHAPE and lvl.formation_index <= ref_idx and lvl.price < setup.timeline.extreme_price_x]
+        
+    print(f"Candidate Turning Points before first-touch (total {len(cands_tp)}):")
+    for tp in cands_tp[-6:]:
+        print(f"  * {tp.kind.value} @ {tp.price:.5f}, formed {tp.formation_time} (idx {tp.formation_index})")
+        
+    print("\nAlerts Generated by Engine:")
+    for a in setup.alerts:
+        print(f"  - {a.breakout_type.value} BO @ {a.broken_level.price:.5f} at {a.breakout_candle_time} (Alert: {a.alert_time})")
+    print()

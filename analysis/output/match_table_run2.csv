@@ -1,0 +1,36 @@
+id,symbol,our_found,key_kind_ref,key_kind_ours,our_level_price,our_bo_price,our_rej_time,our_bo_time,status,diagnosis
+1,EURGBP,Y,OCL,bearish_OCL,0.84822,0.84574,2026-10-07T21:00,2026-10-12T05:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+2,GBPCHF,Y,V,V,1.09790,1.10028,2026-10-08T21:00,2026-10-12T05:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+3,BTCUSD,Y,OCL,V,84099.99000,82820.01000,2026-10-10T21:00,2026-10-12T09:00,PARTIAL,Level kind/price (V 84099.99000 vs OCL 84012.32); Breakout price (82820.01000 vs 82881.23)
+4,EURUSD,Y,V,V,1.12426,1.11826,2026-10-08T21:00,2026-10-12T09:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+5,AUDNZD,Y,OCL,bearish_OCL,1.24082,1.24496,2026-10-06T21:00,2026-10-12T09:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+6,NZDUSD,Y,A,A,0.56238,0.55886,2026-10-08T21:00,2026-10-12T13:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+7,EURCAD,Y,OCL,bullish_OCL,1.60042,1.59420,2026-10-08T21:00,2026-10-12T13:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+8,AUDUSD,Y,A,V,0.69952,0.69726,2026-10-11T21:00,2026-10-12T05:00,PARTIAL,Level kind/price (V 0.69952 vs A 0.69838)
+9,EURJPY,Y,OCL,bearish_OCL,177.73600,176.90200,2026-10-08T21:00,2026-10-12T21:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+10,AUDJPY,Y,OCL,A,110.59400,110.30200,2026-10-11T21:00,2026-10-12T21:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+11,EURNZD,Y,V,V,1.99972,1.99548,2026-10-11T21:00,2026-10-13T05:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+12,NZDJPY,Y,V,bullish_OCL,88.58800,,2026-10-11T21:00,,PARTIAL,"Rejection candle found, but no external breakout confirmed"
+13,GBPCHF,Y,V,V,1.10109,1.10254,2026-10-12T21:00,2026-10-13T05:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+14,NZDJPY,Y,A,bullish_OCL,88.49000,88.64600,2026-10-12T21:00,2026-10-13T09:00,PARTIAL,Breakout price (88.64600 vs 88.76)
+15,USOIL,Y,A,bullish_OCL,88.94800,95.38800,2026-10-04T21:00,2026-10-12T21:00,PARTIAL,Level kind/price (bullish_OCL 88.94800 vs A 89.831)
+16,GBPJPY,Y,V,bullish_OCL,208.89900,209.91400,2026-10-12T21:00,2026-10-13T21:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+17,XAGUSD,Y,A,A,61.34950,58.88050,2026-10-11T21:00,2026-10-14T05:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+18,AUDCAD,Y,A,A,0.99212,0.99416,2026-10-12T21:00,2026-10-14T05:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+19,AUDNZD,Y,A,A,1.24334,1.24564,2026-10-12T21:00,2026-10-14T05:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+20,USDCHF,Y,V,V,0.83150,0.83472,2026-10-12T21:00,2026-10-14T09:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+21,USDJPY,Y,V,V,157.90200,158.65200,2026-10-12T21:00,2026-10-14T09:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+22,CHFJPY,Y,A,A,190.39900,189.51600,2026-10-12T21:00,2026-10-14T13:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+23,GBPNZD,Y,V,V,2.35774,2.36149,2026-10-13T21:00,2026-10-14T09:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+24,NZDCHF,Y,V,V,0.46821,0.46734,2026-10-13T21:00,2026-10-14T17:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+25,AUDUSD,Y,OCL,bullish_OCL,0.70133,0.69534,2026-10-13T21:00,2026-10-14T21:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+26,AUDJPY,Y,A,A,110.58000,,2026-10-12T21:00,,PARTIAL,"Rejection candle found, but no external breakout confirmed"
+27,AUDCHF,Y,A,A,0.58388,0.58146,2026-10-13T21:00,2026-10-14T21:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+28,GER40,Y,V,V,25428.00000,25301.00000,2026-10-13T21:00,2026-10-14T13:00,PARTIAL,Level kind/price (V 25428.00000 vs V 25295.0); Breakout time (2026-10-14T13:00 vs 2026-10-14T21:00)
+29,US30,Y,OCL,bearish_OCL,51476.00000,51885.20000,2026-10-13T21:00,2026-10-15T09:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+30,USDCAD,Y,A,A,1.42824,1.41989,2026-10-13T21:00,2026-10-15T13:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+31,EURCHF,Y,OCL,bearish_OCL,0.93244,0.93116,2026-10-11T21:00,2026-10-12T17:00,PARTIAL,Breakout price (0.93116 vs 0.92904); Breakout time (2026-10-12T17:00 vs 2026-10-15T13:00)
+32,SPX500,Y,OCL,bullish_OCL,7679.80000,7710.60000,2026-10-14T21:00,2026-10-15T13:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+33,EURGBP,Y,A,A,0.84743,0.84282,2026-10-14T21:00,2026-10-16T13:00,MATCH,"Exact match on rejection, key level, breakout level and breakout candle time"
+34,BTCUSDT,Y,OCL,bullish_OCL,82932.99000,82126.01000,2026-10-16T00:00,2026-10-16T12:00,PARTIAL,Level kind/price (bullish_OCL 82932.99000 vs OCL 82635.55)
+35,ETHUSDT,Y,OCL,A,2492.00000,2440.22000,2026-10-16T00:00,2026-10-16T12:00,PARTIAL,Level kind/price (A 2492.00000 vs OCL 2490.16)

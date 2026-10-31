@@ -1,0 +1,6 @@
+pandas>=2.2
+requests>=2.31
+python-dotenv>=1.0
+PyYAML>=6.0
+pytz>=2024.1
+pytest>=8.0
