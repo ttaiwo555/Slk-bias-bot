@@ -17,6 +17,7 @@ __pycache__/
 *.sqlite
 *.sqlite3
 state/
+slk_bot/storage/
 data/cache/
 logs/
 local_logs/
