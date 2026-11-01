@@ -74,10 +74,22 @@ class BotScheduler:
 
     def sync_latest_candles(self, count: int = 5) -> int:
         """
-        Incrementally fetch latest closed candles from OANDA and Coinbase,
+        Incrementally fetch latest closed candles from OANDA and Crypto providers,
         merging with local cache so the bot continuously stays up to date.
+
+        Self-healing bootstrap:
+        Verifies local history depth for every instrument & timeframe:
+          - Daily: requires >= 250 bars (1 year lookback for 6-month level age & 3-disrespect rule)
+          - Weekly: requires >= 104 bars (2 years lookback)
+          - H4: requires >= 1000 bars (LTF turning points and breakout swings)
+        If local count is below threshold (e.g. fresh runner or cold start), it automatically
+        fetches deep historical history to ensure detection parity with the strategy.
         """
         updated = 0
+        MIN_D = 250
+        MIN_W = 104
+        MIN_H4 = 1000
+
         for inst in self.instruments:
             name = inst["name"]
             asset_class = inst.get("asset_class", "forex")
@@ -87,11 +99,20 @@ class BotScheduler:
             prof = get_profile(align)
             open_cont = prof.get("open_continuity", False)
 
+            # Check existing cache depth
+            cnt_d, _, _ = self.cache.get_stats(name, "D")
+            cnt_w, _, _ = self.cache.get_stats(name, "W")
+            cnt_h4, _, _ = self.cache.get_stats(name, "H4")
+
+            req_d = 350 if cnt_d < MIN_D else count
+            req_w = 120 if cnt_w < MIN_W else count
+            req_h4 = 1500 if cnt_h4 < MIN_H4 else count
+
             try:
                 if asset_class == "crypto":
-                    df_d = self.crypto.get_candles(crypto_sym, "D", count=count)
-                    df_w = self.crypto.get_candles(crypto_sym, "W", count=count)
-                    df_h4 = self.crypto.get_candles(crypto_sym, "H4", count=count)
+                    df_d = self.crypto.get_candles(crypto_sym, "D", count=req_d)
+                    df_w = self.crypto.get_candles(crypto_sym, "W", count=req_w)
+                    df_h4 = self.crypto.get_candles(crypto_sym, "H4", count=req_h4)
 
                     for tf, df_new in [("D", df_d), ("W", df_w), ("H4", df_h4)]:
                         if not df_new.empty:
@@ -102,9 +123,10 @@ class BotScheduler:
                     updated += 1
 
                 elif asset_class == "commodity" and name in ("XAUUSD", "XAGUSD") and oanda_sym:
-                    df_d = self.oanda.get_candles(oanda_sym, "D", count=count)
-                    df_w = self.oanda.get_candles(oanda_sym, "W", count=count)
-                    h1 = self.oanda.get_candles(oanda_sym, "H1", count=count * 4)
+                    req_h1 = (req_h4 * 4) if req_h4 > count else (count * 4)
+                    df_d = self.oanda.get_candles(oanda_sym, "D", count=req_d)
+                    df_w = self.oanda.get_candles(oanda_sym, "W", count=req_w)
+                    h1 = self.oanda.get_candles(oanda_sym, "H1", count=min(req_h1, 4000))
                     df_h4 = resample(h1, "H4", "metal", h4_anchor="18:00", h4_timezone="America/New_York")
                     if open_cont:
                         df_d = apply_open_continuity(df_d)
@@ -120,9 +142,9 @@ class BotScheduler:
                     updated += 1
 
                 elif oanda_sym:
-                    df_d = self.oanda.get_candles(oanda_sym, "D", count=count)
-                    df_w = self.oanda.get_candles(oanda_sym, "W", count=count)
-                    df_h4 = self.oanda.get_candles(oanda_sym, "H4", count=count)
+                    df_d = self.oanda.get_candles(oanda_sym, "D", count=req_d)
+                    df_w = self.oanda.get_candles(oanda_sym, "W", count=req_w)
+                    df_h4 = self.oanda.get_candles(oanda_sym, "H4", count=req_h4)
                     if open_cont:
                         df_d = apply_open_continuity(df_d)
                         df_w = apply_open_continuity(df_w)
