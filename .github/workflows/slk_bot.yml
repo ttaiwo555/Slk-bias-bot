@@ -104,13 +104,36 @@ jobs:
       - name: Persist State to bot-data Orphan Branch
         if: always()
         run: |
-          echo "Persisting state..."
-          mkdir -p state
-          [ -f slk_bot/storage/candles.db ] && cp slk_bot/storage/candles.db state/candles.db
-          [ -f alerts_log.csv ] && cp alerts_log.csv state/alerts_log.csv
-          [ -f slk_bot/storage/state.json ] && cp slk_bot/storage/state.json state/state.json
+          echo "Persisting state to bot-data orphan branch..."
+          TMP_STATE=$(mktemp -d)
+          mkdir -p "$TMP_STATE/state"
 
-          if [ -f state/candles.db ] || [ -f state/state.json ]; then
+          # 1. Safely collect newest SQLite candle cache
+          if [ -f slk_bot/storage/candles.db ]; then
+            cp -f slk_bot/storage/candles.db "$TMP_STATE/state/candles.db"
+          elif [ -f state/candles.db ]; then
+            cp -f state/candles.db "$TMP_STATE/state/candles.db"
+          fi
+
+          # 2. Safely collect alerts log
+          if [ -f alerts_log.csv ]; then
+            cp -f alerts_log.csv "$TMP_STATE/state/alerts_log.csv"
+          elif [ -f state/alerts_log.csv ]; then
+            cp -f state/alerts_log.csv "$TMP_STATE/state/alerts_log.csv"
+          fi
+
+          # 3. Safely collect state.json
+          if [ -f slk_bot/storage/state.json ]; then
+            cp -f slk_bot/storage/state.json "$TMP_STATE/state/state.json"
+          elif [ -f state/state.json ]; then
+            cp -f state/state.json "$TMP_STATE/state/state.json"
+          fi
+
+          if [ -f "$TMP_STATE/state/candles.db" ] || [ -f "$TMP_STATE/state/state.json" ]; then
+            echo "--- Persisted state.json summary ---"
+            cat "$TMP_STATE/state/state.json" || true
+            echo ""
+
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
 
@@ -119,9 +142,7 @@ jobs:
             git rm -rf . > /dev/null 2>&1 || true
 
             mkdir -p state
-            [ -f slk_bot/storage/candles.db ] && cp slk_bot/storage/candles.db state/candles.db
-            [ -f alerts_log.csv ] && cp alerts_log.csv state/alerts_log.csv
-            [ -f slk_bot/storage/state.json ] && cp slk_bot/storage/state.json state/state.json
+            cp -rf "$TMP_STATE/state/"* state/
 
             cat << 'EOF' > README.md
           # SLK Bot State Store (Orphan Branch)
@@ -136,8 +157,36 @@ jobs:
 
             git add -f state/ README.md
             git commit -m "chore(state): update bot state [skip ci]"
-            git push --force origin bot-data-stage:bot-data
+            # Retry loop with exponential backoff (Requirement 4)
+            MAX_RETRIES=4
+            DELAY=5
+            SUCCESS=false
+            for i in $(seq 1 $MAX_RETRIES); do
+              echo "Attempt $i of $MAX_RETRIES to push state to bot-data..."
+              if git push --force origin bot-data-stage:bot-data; then
+                echo "State successfully pushed to bot-data on attempt $i."
+                SUCCESS=true
+                break
+              else
+                echo "Push failed on attempt $i. Retrying in $DELAY seconds..."
+                sleep $DELAY
+                DELAY=$((DELAY * 2))
+              fi
+            done
+
+            if [ "$SUCCESS" != "true" ]; then
+              echo "::error::Failed to push bot-data after $MAX_RETRIES attempts!"
+              if [ -n "${{ secrets.TELEGRAM_BOT_TOKEN }}" ] && [ -n "${{ secrets.TELEGRAM_CHAT_ID }}" ]; then
+                MSG="🚨 <b>SLK Bot State Push Failed</b>%0ACould not persist state to bot-data branch after $MAX_RETRIES retries.%0ARun ID: ${{ github.run_id }}"
+                curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+                  -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+                  -d "text=${MSG}" \
+                  -d "parse_mode=HTML" || true
+              fi
+              exit 1
+            fi
             echo "State committed and pushed to bot-data orphan branch."
           else
             echo "No state files found to persist."
           fi
+          rm -rf "$TMP_STATE"

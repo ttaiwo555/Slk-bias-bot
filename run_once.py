@@ -29,9 +29,12 @@ import argparse
 import datetime
 from pathlib import Path
 
-# Force UTF-8 encoding on Windows
-if sys.platform == "win32":
-    os.system("chcp 65001 > nul")
+# Force UTF-8 encoding on Windows without breaking test runners
+if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
 
 from dotenv import load_dotenv
 
@@ -60,31 +63,34 @@ from slk_bot.bot.grids import (
 )
 
 
-def find_state_file() -> Path:
-    """Locate state.json in standard storage or state directories."""
-    candidates = [
-        ROOT / "state" / "state.json",
+def get_state_file_paths() -> list[Path]:
+    """All paths where state.json must be kept synchronized."""
+    return [
         ROOT / "slk_bot" / "storage" / "state.json",
+        ROOT / "state" / "state.json",
     ]
-    for c in candidates:
-        if c.exists():
-            return c
-    # Default to slk_bot/storage/state.json
-    p = ROOT / "slk_bot" / "storage" / "state.json"
-    p.parent.mkdir(parents=True, exist_ok=True)
-    return p
 
 
 def load_state() -> dict:
-    state_file = find_state_file()
-    if state_file.exists():
-        try:
-            with open(state_file, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                log.info("Loaded state from %s (run #%d)", state_file, data.get("run_count", 0))
-                return data
-        except Exception as e:
-            log.warning("Could not read state file %s (%s). Starting fresh.", state_file, e)
+    best_state: dict = {}
+    best_mtime: float = -1.0
+
+    for path in get_state_file_paths():
+        if path.exists():
+            try:
+                mtime = path.stat().st_mtime
+                with open(path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                # Prioritize state file with higher run_count or most recent mtime
+                if not best_state or data.get("run_count", 0) > best_state.get("run_count", 0) or mtime > best_mtime:
+                    best_state = data
+                    best_mtime = mtime
+                    log.info("Loaded state candidate from %s (run #%d, offset %s)", path, data.get("run_count", 0), data.get("last_update_id", 0))
+            except Exception as e:
+                log.warning("Could not read state file %s (%s).", path, e)
+
+    if best_state:
+        return best_state
 
     now_iso = datetime.datetime.now(UTC_TZ).isoformat()
     return {
@@ -98,14 +104,113 @@ def load_state() -> dict:
 
 
 def save_state(state: dict) -> None:
-    state_file = find_state_file()
-    state_file.parent.mkdir(parents=True, exist_ok=True)
-    try:
-        with open(state_file, "w", encoding="utf-8") as f:
-            json.dump(state, f, indent=2)
-        log.info("State saved successfully to %s", state_file)
-    except Exception as e:
-        log.error("Failed to save state to %s: %s", state_file, e)
+    """Synchronously persist state to all canonical locations."""
+    for path in get_state_file_paths():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            temp_path = path.with_suffix(".tmp")
+            with open(temp_path, "w", encoding="utf-8") as f:
+                json.dump(state, f, indent=2)
+                f.flush()
+                os.fsync(f.fileno())
+            temp_path.replace(path)
+            log.info("State successfully synced to %s (run #%d, offset %s)", path, state.get("run_count", 0), state.get("last_update_id", 0))
+        except Exception as e:
+            log.error("Failed to save state to %s: %s", path, e)
+
+
+def maybe_send_heartbeat(
+    state: dict,
+    telegram: TelegramBotClient,
+    cache: CandleCache,
+    now_utc: datetime.datetime,
+    dry_run: bool,
+) -> bool:
+    """
+    Sends the weekly heartbeat message at most once every 7 days,
+    based on the persisted 'last_heartbeat_time_utc' timestamp in state.
+    """
+    if dry_run or not telegram.token or not telegram.chat_id:
+        return False
+
+    last_hb = state.get("last_heartbeat_time_utc")
+    send_heartbeat = False
+
+    if not last_hb:
+        first_start = state.get("first_started_utc")
+        if first_start:
+            try:
+                fs_dt = datetime.datetime.fromisoformat(first_start)
+                if fs_dt.tzinfo is None:
+                    fs_dt = fs_dt.replace(tzinfo=UTC_TZ)
+                if (now_utc - fs_dt).total_seconds() >= 7 * 86400:
+                    send_heartbeat = True
+                else:
+                    state["last_heartbeat_time_utc"] = now_utc.isoformat()
+                    save_state(state)
+            except Exception:
+                send_heartbeat = True
+        else:
+            state["last_heartbeat_time_utc"] = now_utc.isoformat()
+            save_state(state)
+    else:
+        try:
+            hb_dt = datetime.datetime.fromisoformat(last_hb)
+            if hb_dt.tzinfo is None:
+                hb_dt = hb_dt.replace(tzinfo=UTC_TZ)
+            diff_sec = (now_utc - hb_dt).total_seconds()
+            if diff_sec >= 7 * 86400:  # 7 days = 604,800 seconds
+                send_heartbeat = True
+        except Exception as e:
+            log.warning("Could not parse last_heartbeat_time_utc '%s': %s", last_hb, e)
+            send_heartbeat = False
+
+    if send_heartbeat:
+        log.info("Sending weekly heartbeat to Telegram...")
+        with cache._get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute("SELECT count(*) FROM alerts_sent")
+            total_alerts_sent = cur.fetchone()[0]
+
+        first_start = state.get("first_started_utc", now_utc.isoformat())
+        try:
+            fs_dt = datetime.datetime.fromisoformat(first_start)
+            days_active = (now_utc - fs_dt).days
+        except Exception:
+            days_active = 0
+
+        # Dynamic active instruments count
+        active_count = 39
+        try:
+            from slk_bot.bot.scheduler import INST_DATA
+            active_count = len([
+                inst for inst in INST_DATA.get("instruments", [])
+                if not (inst.get("exclude_from_triggers") or inst.get("name") == "USOIL")
+            ])
+        except Exception:
+            pass
+
+        heartbeat_msg = (
+            "💓 <b>SLK Bias Bot – Weekly Heartbeat</b>\n\n"
+            "• <b>Status:</b> All systems operational on GitHub Actions cron\n"
+            f"• <b>Watchlist:</b> {active_count} active instruments (USOIL excluded)\n"
+            "• <b>Total Runs:</b> {run_count:,}\n"
+            "• <b>Total Alerts Sent:</b> {total_alerts_sent:,}\n"
+            "• <b>Uptime:</b> Active for {days_active} days\n\n"
+            "<i>Bot will continue monitoring every 15 minutes.</i>"
+        ).format(
+            run_count=state.get("run_count", 1),
+            total_alerts_sent=total_alerts_sent,
+            days_active=days_active,
+        )
+
+        telegram.send_message(heartbeat_msg)
+        state["last_heartbeat_time_utc"] = now_utc.isoformat()
+        save_state(state)
+        log.info("Weekly heartbeat dispatched and timestamp persisted: %s", state["last_heartbeat_time_utc"])
+        return True
+
+    return False
 
 
 def parse_args() -> argparse.ArgumentParser:
@@ -165,7 +270,12 @@ def main() -> int:
     # Initialize components
     cache = CandleCache()
     telegram = TelegramBotClient(token=bot_token, chat_id=chat_id, cache=cache, dry_run=dry_run)
-    handler = BotCommandHandler(owner_chat_id=chat_id, cache=cache, dry_run=dry_run)
+    handler = BotCommandHandler(
+        owner_chat_id=chat_id,
+        cache=cache,
+        dry_run=dry_run,
+        state_getter=lambda: state,
+    )
 
     # Make sure no webhook is set so getUpdates polling works cleanly
     telegram.delete_webhook()
@@ -202,12 +312,19 @@ def main() -> int:
             if resp:
                 telegram.send_message(resp)
 
-        state["last_update_id"] = last_update_id
+        # Requirement 1: Save Telegram offset immediately after processing commands
+        if last_update_id != state.get("last_update_id", 0):
+            state["last_update_id"] = last_update_id
+            save_state(state)
+            log.info("Telegram offset updated to %d and saved immediately to prevent duplicate replies.", last_update_id)
 
     except Exception as e:
         log.warning("Error processing Telegram getUpdates: %s", e)
 
-    # Step 2: Grid close check (Fast No-Op path)
+    # Step 2: Weekly Heartbeat Message (at most once every 7 days)
+    maybe_send_heartbeat(state, telegram, cache, now_utc, dry_run)
+
+    # Step 3: Grid close check (Fast No-Op path)
     current_grid_times = get_all_latest_closed_candle_times(now_utc)
     stored_grid_times = state.get("last_candle_close_times", {})
     has_new_candles, new_grids = evaluate_new_candles_closed(current_grid_times, stored_grid_times)
@@ -220,20 +337,20 @@ def main() -> int:
         log.info("⚡ Fast no-op path: No new candle has closed across any grid and no scan requested.")
         state["last_run_time_utc"] = now_utc.isoformat()
         save_state(state)
-        log.info("SLK Bot finished in fast no-op mode (0 alerts).")
+        log.info("SLK Bot finished in fast no-op mode (0 alerts). Total runs: %d", state["run_count"])
         return 0
 
-    # Step 3: Run incremental sync & setup evaluation
+    # Step 4: Run incremental sync & setup evaluation
     try:
         log.info("Initializing BotScheduler for scan cycle...")
         scheduler = BotScheduler(cache=cache, telegram_client=telegram)
 
-        # 3a. Incrementally fetch latest candles
+        # 4a. Incrementally fetch latest candles
         log.info("Syncing latest closed candles incrementally...")
         updated_count = scheduler.sync_latest_candles(count=5)
         log.info("Incremental candle sync updated %d instruments.", updated_count)
 
-        # 3b. Evaluate setup lifecycles & detect new confirmations
+        # 4b. Evaluate setup lifecycles & detect new confirmations
         log.info("Running setup evaluation across active watchlist...")
         dispatched_alerts = scheduler.run_scan_cycle()
 
@@ -244,6 +361,8 @@ def main() -> int:
 
         # Update stored candle close times upon successful scan
         state["last_candle_close_times"] = current_grid_times
+        state["last_run_time_utc"] = now_utc.isoformat()
+        save_state(state)
         log.info("Scan completed successfully. Total confirmed alerts dispatched: %d", len(dispatched_alerts))
 
     except Exception as e:
@@ -253,50 +372,7 @@ def main() -> int:
         save_state(state)
         return 1
 
-    # Step 4: Weekly Heartbeat Message
-    if not dry_run and bot_token and chat_id:
-        last_hb = state.get("last_heartbeat_time_utc")
-        send_heartbeat = False
-        if not last_hb:
-            send_heartbeat = True
-        else:
-            try:
-                hb_dt = datetime.datetime.fromisoformat(last_hb)
-                if (now_utc - hb_dt).total_seconds() >= 7 * 86400:  # 7 days
-                    send_heartbeat = True
-            except Exception:
-                send_heartbeat = True
-
-        if send_heartbeat:
-            log.info("Sending weekly heartbeat to Telegram...")
-            with cache._get_connection() as conn:
-                cur = conn.cursor()
-                cur.execute("SELECT count(*) FROM alerts_sent")
-                total_alerts_sent = cur.fetchone()[0]
-
-            first_start = state.get("first_started_utc", now_utc.isoformat())
-            try:
-                fs_dt = datetime.datetime.fromisoformat(first_start)
-                days_active = (now_utc - fs_dt).days
-            except Exception:
-                days_active = 0
-
-            heartbeat_msg = (
-                "💓 <b>SLK Bias Bot – Weekly Heartbeat</b>\n\n"
-                "• <b>Status:</b> All systems operational on GitHub Actions cron\n"
-                "• <b>Watchlist:</b> 37 active instruments (USOIL excluded)\n"
-                "• <b>Total Runs:</b> {run_count:,}\n"
-                "• <b>Total Alerts Sent:</b> {total_alerts_sent:,}\n"
-                "• <b>Uptime:</b> Active for {days_active} days\n\n"
-                "<i>Bot will continue monitoring every 15 minutes.</i>"
-            ).format(run_count=state["run_count"], total_alerts_sent=total_alerts_sent, days_active=days_active)
-            telegram.send_message(heartbeat_msg)
-            state["last_heartbeat_time_utc"] = now_utc.isoformat()
-
-    # Step 5: Save State and Exit
-    state["last_run_time_utc"] = now_utc.isoformat()
-    save_state(state)
-    log.info("SLK Bot run-once execution completed cleanly.")
+    log.info("SLK Bot run-once execution completed cleanly. Total runs: %d", state["run_count"])
     return 0
 
 

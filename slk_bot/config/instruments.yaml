@@ -183,7 +183,7 @@ instruments:
     oanda_symbol: WTICO_USD
     alignment: oil
     display_scale: 1
-    exclude_from_triggers: false
+    exclude_from_triggers: true
 
   - name: XAUUSD
     asset_class: commodity

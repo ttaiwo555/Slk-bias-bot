@@ -46,13 +46,16 @@ class BotCommandHandler:
         owner_chat_id: Optional[str] = None,
         cache: Optional[CandleCache] = None,
         dry_run: bool = False,
+        state_getter: Optional[Callable[[], dict]] = None,
     ) -> None:
         self.owner_chat_id = str(owner_chat_id or os.getenv("TELEGRAM_CHAT_ID") or os.getenv("TELEGRAM_OWNER_CHAT_ID", "")).strip()
         self.cache = cache or CandleCache()
         self.dry_run = dry_run
+        self.state_getter = state_getter
+        self.all_instruments = {inst["name"]: inst for inst in INST_DATA.get("instruments", [])}
         self.instruments = {
-            inst["name"]: inst for inst in INST_DATA.get("instruments", [])
-            if not inst.get("exclude_from_triggers")
+            inst["name"]: inst for inst in self.all_instruments.values()
+            if not (inst.get("exclude_from_triggers") or inst.get("name") == "USOIL")
         }
         self.alert_preferences = dict(SETTINGS_DATA.get("alert_preferences", {
             "external_bo": True,
@@ -118,8 +121,8 @@ class BotCommandHandler:
     def _cmd_start(self) -> str:
         return (
             "👋 <b>Welcome to SLK Bias Bot!</b>\n\n"
-            "The bot monitors HTF key levels, liquidity sweeps, and LTF structural breakouts "
-            "across 37 watchlist instruments.\n\n"
+            f"The bot monitors HTF key levels, liquidity sweeps, and LTF structural breakouts "
+            f"across {len(self.instruments)} active watchlist instruments.\n\n"
             "<b>Quick Commands:</b>\n"
             "• /active – View currently active confirmed setups\n"
             "• /internal – View active internal breakouts\n"
@@ -263,7 +266,7 @@ class BotCommandHandler:
         return "\n".join(lines)
 
     def _cmd_scan(self) -> str:
-        return "🔄 <b>Scan initiated.</b> A complete scan across all 37 watchlist instruments will run immediately on this execution cycle."
+        return f"🔄 <b>Scan initiated.</b> A complete scan across all {len(self.instruments)} active watchlist instruments will run immediately on this execution cycle."
 
     def _cmd_status(self) -> str:
         # Query database stats
@@ -280,16 +283,23 @@ class BotCommandHandler:
         now_str = now_utc.strftime("%Y-%m-%d %H:%M:%S UTC")
         dry_str = "ENABLED (Console Only)" if self.dry_run else "DISABLED (Live Telegram)"
 
-        # Read state info from state.json
+        # Read state info from state_getter or state.json
         state_info: dict[str, Any] = {}
-        for candidate in [ROOT / "storage" / "state.json", ROOT.parent / "state" / "state.json", ROOT.parent / "slk_bot" / "storage" / "state.json"]:
-            if candidate.exists():
-                try:
-                    with open(candidate, "r", encoding="utf-8") as f:
-                        state_info = json.load(f)
-                    break
-                except Exception:
-                    pass
+        if self.state_getter:
+            try:
+                state_info = self.state_getter() or {}
+            except Exception:
+                state_info = {}
+
+        if not state_info:
+            for candidate in [ROOT / "storage" / "state.json", ROOT.parent / "state" / "state.json", ROOT.parent / "slk_bot" / "storage" / "state.json"]:
+                if candidate.exists():
+                    try:
+                        with open(candidate, "r", encoding="utf-8") as f:
+                            state_info = json.load(f)
+                        break
+                    except Exception:
+                        pass
 
         last_run = state_info.get("last_run_time_utc")
         if last_run:
@@ -302,6 +312,8 @@ class BotCommandHandler:
                 last_run_str = str(last_run)
         else:
             last_run_str = "First run in progress"
+
+        run_count = state_info.get("run_count", 0)
 
         first_started = state_info.get("first_started_utc")
         if first_started:
@@ -328,9 +340,10 @@ class BotCommandHandler:
             f"🤖 <b>SLK Bias Bot Status</b>\n\n"
             f"• <b>Current Time:</b> {now_str}\n"
             f"• <b>Last Run Time:</b> {last_run_str}\n"
+            f"• <b>Total Runs:</b> {run_count:,}\n"
             f"• <b>State Age:</b> {state_age_str}\n"
             f"• <b>Last New-Candle Times:</b>\n" + "\n".join(candle_lines) + "\n\n"
-            f"• <b>Active Watchlist:</b> {len(self.instruments)} instruments (USOIL excluded)\n"
+            f"• <b>Active Watchlist:</b> {len(self.instruments)} active instruments (USOIL excluded)\n"
             f"• <b>Total Cached Candles:</b> {total_candles:,}\n"
             f"• <b>Stored Setups:</b> {total_setups:,}\n"
             f"• <b>Total Alerts Sent:</b> {total_alerts_sent:,}\n"
@@ -343,6 +356,7 @@ class BotCommandHandler:
             ac = inst.get("asset_class", "forex")
             align = inst.get("alignment", "forex")
             lines.append(f"• <b>{name}</b> ({ac}, align: {align})")
+        lines.append("\n<i>Excluded from triggers: USOIL</i>")
         return "\n".join(lines)
 
     def _cmd_verify(self, args: list[str]) -> str:
